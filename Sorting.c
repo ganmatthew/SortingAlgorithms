@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void swap (int * a, int * b)
 {
@@ -40,12 +41,12 @@ void quicksort (int * array, int low, int high)
     }
 }
 
-int main()
+void quicksortSample()
 {
     int i;
     int test[10] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 4};
     int size = 10;
-
+    printf("Quicksort: \n");
     printf("Before sorting: \n");
     for (i = 0; i < size; i++)
     {
@@ -59,7 +60,12 @@ int main()
     {
         printf("%d ", test[i]);
     }
+}
 
+int main()
+{
+    //quicksortSample();
+    //mergesortSample();
     
     return 0;
 }
