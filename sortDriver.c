@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "BubbleSort.h"
-#include "InsertionSort.h"
-#include "SequentialSort.h"
-
-#define ARRAY_SIZE 20
+#define ARRAY_SIZE 7
 #define LIST_MIN 1
 #define LIST_MAX 20
 
@@ -35,6 +31,14 @@ void DisplayData (int A[], int N) {
    printf("---\n");
 }
 
+void count (int counter) {
+   printf("counter: %d\n", counter);
+}
+
+#include "BubbleSort.h"
+#include "InsertionSort.h"
+#include "SelectionSort.h"
+
 int main () {
    srand(time(NULL));
    int list[ARRAY_SIZE];
@@ -42,7 +46,7 @@ int main () {
    GenerateData(list, ARRAY_SIZE);
    DisplayData(list, ARRAY_SIZE);
 
-   //BubbleSort(list, ARRAY_SIZE);
+   BubbleSort(list, ARRAY_SIZE);
    //InsertionSort(list, ARRAY_SIZE);
    //SequentialnSort(list, ARRAY_SIZE);
 

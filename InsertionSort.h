@@ -2,6 +2,7 @@
 // Based on https://www.hackerearth.com/practice/algorithms/sorting/insertion-sort/tutorial/
 
 void InsertionSort(int A[], int N) {
+   int ctr = 0;
    int i, k, temp;
 
    for (i = 0; i < N; i++) {
@@ -11,8 +12,12 @@ void InsertionSort(int A[], int N) {
       while (k > 0 && temp < A[k - 1]) {
          A[k] = A[k - 1];
          --k;
+         ctr++;
       }
 
       A[k] = temp;
+      ctr++;
    }
+
+   count(ctr);
 }
