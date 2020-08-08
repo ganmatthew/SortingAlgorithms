@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define ARRAY_SIZE 7
+#define ARRAY_SIZE 10
 #define LIST_MIN 1
-#define LIST_MAX 20
+#define LIST_MAX 100
 
 int Random (int floor, int ceiling, int cycles) { 
 	int i, num;
@@ -18,7 +18,7 @@ int Random (int floor, int ceiling, int cycles) {
 void GenerateData (int A[], int N) {
    int i;
    for (i = 0; i < N; i++) {
-      A[i] = Random(LIST_MIN, LIST_MAX, i + 2);
+      A[i] = Random(LIST_MIN, LIST_MAX, 2);
    }
 }
 
@@ -46,9 +46,9 @@ int main () {
    GenerateData(list, ARRAY_SIZE);
    DisplayData(list, ARRAY_SIZE);
 
-   BubbleSort(list, ARRAY_SIZE);
+   //BubbleSort(list, ARRAY_SIZE);
    //InsertionSort(list, ARRAY_SIZE);
-   //SequentialnSort(list, ARRAY_SIZE);
+   SelectionSort(list, ARRAY_SIZE);
 
    DisplayData(list, ARRAY_SIZE);
 }
