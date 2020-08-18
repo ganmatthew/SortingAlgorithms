@@ -1,5 +1,6 @@
 // Bubble Sort
 // Based on https://www.programmingsimplified.com/c/source-code/c-program-bubble-sort
+// John Matthew Gan
 
 void BubbleSort (int A[], int N) {
    int ctr = 0;

@@ -1,5 +1,6 @@
 // Selection Sort
 // Based on https://www.geeksforgeeks.org/selection-sort/
+// John Matthew Gan
 
 void SelectionSort(int A[], int N) {
    int i, j, min, temp, ctr = 0;

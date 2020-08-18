@@ -1,5 +1,6 @@
 // Insertion Sort
 // Based on https://www.hackerearth.com/practice/algorithms/sorting/insertion-sort/tutorial/
+// John Matthew Gan
 
 void InsertionSort(int A[], int N) {
    int ctr = 0;
