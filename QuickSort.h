@@ -1,5 +1,5 @@
 // Quick Sort 
-// Based on <LINK>
+// Based on https://www.geeksforgeeks.org/quick-sort/
 // Jose Noel Noblefranca
 
 void swap (int * a, int * b)
