@@ -45,6 +45,7 @@ void count (int counter) {
 #include "SelectionSort.h"
 #include "QuickSort.h"
 #include "MergeSort.h"
+#include "RadixSort.h"
 
 int main () {
    srand(time(NULL));
@@ -58,6 +59,7 @@ int main () {
    //SelectionSort(list, ARRAY_SIZE);
    QuickSort(list, ARRAY_SIZE);
    //MergeSort(list, ARRAY_SIZE);
+   //RadixSort(list, ARRAY_SIZE);
 
    DisplayData(list, ARRAY_SIZE);
 }
