@@ -10,7 +10,7 @@
     2. The displayed output shows 6 digits after the decimal point.
 */ 
 
-#define CPU_TIME  (1)
+#define CPU_TIME  (0)
 
 #include <stdio.h>
 #include <time.h>
@@ -63,5 +63,5 @@ int main () {
     printf("CPU Time measured: %lf in milliseconds.\n", elapsed * 1000); // multiply seconds by 1000 to get milliseconds
     
     return 0;
-    
+
 }
