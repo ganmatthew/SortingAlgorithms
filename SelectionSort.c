@@ -2,7 +2,7 @@
 // Based on https://www.geeksforgeeks.org/selection-sort/
 // John Matthew Gan
 
-void SelectionSort (int A[], sortResult loc, int N) {
+void SelectionSort (int A[], sortResult * loc, int N) {
    int i, j, min, temp, ctr = 0;
    for (i = 0; i < N; i++) {
       
@@ -20,7 +20,7 @@ void SelectionSort (int A[], sortResult loc, int N) {
 
    }
 
-   loc.count = ctr;
-   loc.time = 0;
-   printf("[SelectionSort] count = %d, time = %d\n", loc.count, loc.time);
+   loc -> count = ctr;
+   loc -> time = 0;
+   printf("[SelectionSort] count = %d, time = %d\n", loc -> count, loc -> time);
 }

@@ -2,7 +2,7 @@
 // Based on https://www.hackerearth.com/practice/algorithms/sorting/insertion-sort/tutorial/
 // John Matthew Gan
 
-void InsertionSort (int A[], sortResult loc, int N) {
+void InsertionSort (int A[], sortResult * loc, int N) {
    int ctr = 0;
    int i, k, temp;
 
@@ -20,7 +20,7 @@ void InsertionSort (int A[], sortResult loc, int N) {
       ctr++;
    }
 
-   loc.count = ctr;
-   loc.time = 0;
-   printf("[InsertionSort] count = %d, time = %d\n", loc.count, loc.time);
+   loc -> count = ctr;
+   loc -> time = 0;
+   printf("[InsertionSort] count = %d, time = %d\n", loc -> count, loc -> time);
 }

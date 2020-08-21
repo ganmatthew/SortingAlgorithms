@@ -40,11 +40,11 @@ void ManualInputData (int A[], int N) {
    }
 }
 
-void getAverageData (float A[][2], int index, sortResult loc[]) {
+void getAverageData (float A[][2], int index, sortResult * loc) {
    int i, t;
 
    for (t = 0; t < 2; t++) {
-      float sum;
+      float sum = 0;
       for (i = 0; i < 10; i++) {
          switch (t) {
             case 0:
@@ -87,26 +87,23 @@ char getLetterFromSortIndex (int index) {
    }
 }
 
-void recordData (dataSet data, int N) {
-   int i, t;
+void recordData (dataSet * data, int N) {
+   int i;
    float average[6][2];
    FILE *destFile;
 
-   getAverageData(average, 0, data.b);
-   getAverageData(average, 1, data.i);
-   //getAverageData(average, 2, data.m);
-   //getAverageData(average, 3, data.q);
-   //getAverageData(average, 4, data.r);
-   getAverageData(average, 5, data.s);
+   getAverageData(average, 0, data -> b);
+   getAverageData(average, 1, data -> i);
+   //getAverageData(average, 2, data -> m);
+   //getAverageData(average, 3, data -> q);
+   //getAverageData(average, 4, data -> r);
+   getAverageData(average, 5, data -> s);
 
    if ( (destFile = fopen("output.txt", "a")) ) {
       for (i = 0; i < 6; i++) {
-         fprintf(destFile, "%d %c", data.N, getLetterFromSortIndex(i));     // write N and type to file
+         fprintf(destFile, "%d %c ", data -> N, getLetterFromSortIndex(i));    // write N and type to file
          getLetterFromSortIndex(i);
-         for (t = 0; t < 2; t++) {
-            fprintf(destFile, " %f", average[i][t]);  // write count and time to file
-         }
-         fprintf(destFile, "\n");     // newline
+         fprintf(destFile, "%0.2f %f\n", average[i][0], average[i][1]);  // write count and time to file
       }
    }
 
@@ -136,14 +133,15 @@ int main () {
       GenerateData(numberList, N);
 
       for (M = 0; M < 10; M++) {
-         BubbleSort(numberList, recordedData.b[M], N);
-         InsertionSort(numberList, recordedData.i[M], N);
-         //MergeSort(numberList, recordedData.m[M], N);
-         //QuickSort(numberList, recordedData.q[M], N);
-         //RadixSort(numberList, recordedData.r[M], N);
-         SelectionSort(numberList, recordedData.s[M], N);
+         printf("\n[main] M is %d of %d\n", M, 10);
+         BubbleSort(numberList, &recordedData.b[M], N);
+         InsertionSort(numberList, &recordedData.i[M], N);
+         //MergeSort(numberList, &recordedData.m[M], N);
+         //QuickSort(numberList, &recordedData.q[M], N);
+         //RadixSort(numberList, &ecordedData.r[M], N);
+         SelectionSort(numberList, &recordedData.s[M], N);
 
-         recordData(recordedData, N);
+         recordData(&recordedData, N);
       }  
    }
    //DisplayData(data, N);
