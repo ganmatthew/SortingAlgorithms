@@ -63,4 +63,5 @@ int main () {
     printf("CPU Time measured: %lf in milliseconds.\n", elapsed * 1000); // multiply seconds by 1000 to get milliseconds
     
     return 0;
+    
 }
