@@ -2,7 +2,7 @@
 // Based on https://www.geeksforgeeks.org/merge-sort/
 // Jose Noel Noblefranca
 
-void merge(int arr[], int l, int m, int r) 
+void merge(int arr[], int l, int m, int r, int * ctr) 
 { 
     int i, j, k; 
     int n1 = m - l + 1; 
@@ -25,11 +25,13 @@ void merge(int arr[], int l, int m, int r)
     while (i < n1 && j < n2) { 
         if (L[i] <= R[j]) { 
             arr[k] = L[i]; 
-            i++; 
+            i++;
+            ++(*ctr);
         } 
         else { 
             arr[k] = R[j]; 
             j++; 
+            ++(*ctr);
         } 
         k++; 
     } 
@@ -40,6 +42,7 @@ void merge(int arr[], int l, int m, int r)
         arr[k] = L[i]; 
         i++; 
         k++; 
+        ++(*ctr);
     } 
   
     /* Copy the remaining elements of R[], if there 
@@ -48,26 +51,37 @@ void merge(int arr[], int l, int m, int r)
         arr[k] = R[j]; 
         j++; 
         k++; 
+        ++(*ctr);
     } 
+
 } 
 
 /* l is for left index and r is right index of the 
    sub-array of arr to be sorted */
-void mergeSort(int arr[], int l, int r) 
+void mergeSort(int arr[], int l, int r, int * ctr) 
 { 
    if (l < r) { 
       // Same as (l+r)/2, but avoids overflow for 
       // large l and h 
       int m = l + (r - l) / 2; 
+      ++*ctr; 
 
       // Sort first and second halves 
-      mergeSort(arr, l, m); 
-      mergeSort(arr, m + 1, r); 
+      mergeSort(arr, l, m, ++(*ctr)); 
+      mergeSort(arr, m + 1, r, ++(*ctr)); 
 
-      merge(arr, l, m, r); 
+      merge(arr, l, m, r, &(*ctr));
+      
    } 
+
+   return ctr;
 } 
   
-void MergeSort (int A[], int N) {
-   mergeSort(A, 0, N);
+void MergeSort (int A[],  sortResult loc, int N) {
+   int ctr = 0;
+   mergeSort(A, 0, N, &ctr);
+   
+   loc.count = ctr;
+   loc.time = 0;
+   printf("[MergeSort] count = %d, time = %d\n", loc.count, loc.time);
 }
