@@ -2,7 +2,7 @@
 // Based on https://www.programmingsimplified.com/c/source-code/c-program-bubble-sort
 // John Matthew Gan
 
-void BubbleSort (int A[], int N) {
+void BubbleSort (int A[], sortResult loc, int N) {
    int ctr = 0;
    int i, k, temp = A[0];
 
@@ -19,5 +19,7 @@ void BubbleSort (int A[], int N) {
       ctr++;
    }
 
-   count(ctr);
+   loc.count = ctr;
+   loc.time = 0;
+   printf("[BubbleSort] count = %d, time = %d\n", loc.count, loc.time);
 }
