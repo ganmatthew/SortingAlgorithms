@@ -49,12 +49,12 @@ void count (int counter) {
 }
 
 // Main driver code
-#include "BubbleSort.h"
-#include "InsertionSort.h"
-#include "SelectionSort.h"
-#include "QuickSort.h"
-#include "MergeSort.h"
-#include "RadixSort.h"
+#include "BubbleSort.c"
+#include "InsertionSort.c"
+#include "SelectionSort.c"
+#include "QuickSort.c"
+#include "MergeSort.c"
+#include "RadixSort.c"
 
 int main () {
    srand((unsigned) time(0)); // get seed from current time
