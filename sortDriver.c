@@ -1,26 +1,32 @@
+// Sorting Algorithms Test Driver File
+// John Matthew Gan, Angelo Remudaro
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
-#include "randomgenerator.c"
+#include "randomgenerator.c" // random number generator
 
-#define N_MIN 1024 // log base 2 (32768) = 10
-#define N_MAX 32768 // log base 2 (32768) = 15
+#define N_MIN 1024   // log base 2 (32768) = 10
+#define N_MAX 32768  // log base 2 (32768) = 15
+#define M_MAX 10     // number of cycles per N run
 
+// Contains the execution time and frequency count of each M run
 typedef struct sortresult { 
-   double time;   // machine execution time
-   int count;  // frequncy count
+   double time;      // machine execution time
+   int count;        // frequncy count
 } sortResult;
 
+// Contains the all testing data of each N run
 typedef struct dataset {
    int N;            // value of N
-   sortResult b[10]; // bubble sort
-   sortResult i[10]; // insertion sort
-   sortResult m[10]; // merge sort
-   sortResult q[10]; // quick sort
-   sortResult r[10]; // radix sort
-   sortResult s[10]; // selection sort
+   sortResult b[M_MAX]; // bubble sort
+   sortResult i[M_MAX]; // insertion sort
+   sortResult m[M_MAX]; // merge sort
+   sortResult q[M_MAX]; // quick sort
+   sortResult r[M_MAX]; // radix sort
+   sortResult s[M_MAX]; // selection sort
 } dataSet;
 
 // Diagnostics for displaying the array
@@ -56,13 +62,14 @@ void ManualInputData (int A[], int N) {
    }
 }
 
+// Retrieves data from sortResult and places the average of its contents into an array
 void getAverageData (float A[][2], int index, sortResult * loc) {
    int i, t;
    char algorithm[15];
 
    for (t = 0; t < 2; t++) {
       float sum = 0;
-      for (i = 0; i < 10; i++) {
+      for (i = 0; i < M_MAX; i++) {
          switch (t) {
             case 0:
                sum += loc[i].count;
@@ -72,7 +79,7 @@ void getAverageData (float A[][2], int index, sortResult * loc) {
                break;
          }
       }
-      A[index][t] = sum / 10;
+      A[index][t] = sum / M_MAX;
    } 
 
    switch(index) {
@@ -94,11 +101,12 @@ void getAverageData (float A[][2], int index, sortResult * loc) {
       case 5:
          strcpy(algorithm, "Selection Sort");
          break;
-      
    }
+   
    printf("[getAverageData] %-12s\t%-8s%10.0f, time = %f\n", algorithm, "count = ", A[index][0], A[index][1]);
 }
 
+// Returns a letter corresponding to a sorting algorithm (for text file display purposes)
 char getLetterFromSortIndex (int index) {
    switch (index) {
       case 0:
@@ -125,6 +133,7 @@ char getLetterFromSortIndex (int index) {
    }
 }
 
+// Saves the data of each run into a text file
 void recordData (dataSet * data, int N) {
    int i;
    float average[6][2];
@@ -140,15 +149,14 @@ void recordData (dataSet * data, int N) {
 
    if ( (destFile = fopen("output.txt", "a+")) ) {
       for (i = 0; i < 6; i++) {
-         fprintf(destFile, "%5d %c ", data -> N, getLetterFromSortIndex(i));    // write N and type to file
-         fprintf(destFile, "%13.0f %f\n", average[i][0], average[i][1]);  // write count and time to file
+         fprintf(destFile, "%5d %c ", data -> N, getLetterFromSortIndex(i));      // write N and type to file
+         fprintf(destFile, "%13.0f %f\n", average[i][0], average[i][1]);         // write count and time to file
       }
    }
    else {
       destFile = fopen("output.txt", "r");
    }
    
-
    fclose(destFile);
 }
 
@@ -174,8 +182,8 @@ int main () {
       //ManualInputData(numberList, N);
       GenerateData(unsortedList, N);
 
-      for (M = 0; M < 10; M++) {
-         printf("\n[main] M is index %d of %d\n", M, 10);
+      for (M = 0; M < M_MAX; M++) {
+         printf("\n[main] M is index %d of %d\n", M, M_MAX);
          BubbleSort(unsortedList, &recordedData.b[M], N);
          InsertionSort(unsortedList, &recordedData.i[M], N);
          MergeSort(unsortedList, &recordedData.m[M], N);
@@ -183,8 +191,8 @@ int main () {
          RadixSort(unsortedList, &recordedData.r[M], N);
          SelectionSort(unsortedList, &recordedData.s[M], N);
 
-         if (M == 9) {
-            recordData(&recordedData, N);
+         if (M == M_MAX - 1) {
+            recordData(&recordedData, N); // saves the data at the end of each N run
          }
 
       }  
