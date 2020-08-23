@@ -2,6 +2,8 @@
 // Based on https://www.geeksforgeeks.org/quick-sort/
 // Jose Noel Noblefranca
 
+#include <time.h>
+
 void swap (int * a, int * b)
 {
     int c;
@@ -46,12 +48,22 @@ void quicksort (int * array, int low, int high, int * ctr)
 
 void QuickSort (int A[],  sortResult * loc, int N) {
     int ctr = 0;
-   int D[N];
+    int D[N];
+
+    struct timespec begin, end; 
+
+    clock_gettime(CLOCK_REALTIME, &begin);
    
-   DuplicateData(D, A, N);
+    DuplicateData(D, A, N);
     quicksort(D, 0, N - 1, &ctr);
 
+    clock_gettime(CLOCK_REALTIME, &end);
+    
+    long seconds = end.tv_sec - begin.tv_sec;
+    long nanoseconds = end.tv_nsec - begin.tv_nsec;
+    double elapsed = seconds + nanoseconds*1e-9;
+
     loc -> count = ctr;
-    loc -> time = 0;
-    printf("[QuickSort] count = %d, time = %d\n", loc -> count, loc -> time);
+    loc -> time = elapsed;
+    printf("[QuickSort] \tcount = %9d, time = %f\n", loc -> count, loc -> time);
 }

@@ -2,6 +2,8 @@
 // Based on https://www.geeksforgeeks.org/merge-sort/
 // Jose Noel Noblefranca
 
+#include <time.h>
+
 void merge(int arr[], int l, int m, int r, int * ctr) 
 { 
     int i, j, k; 
@@ -78,11 +80,20 @@ void mergeSort(int arr[], int l, int r, int * ctr)
 void MergeSort (int A[],  sortResult * loc, int N) {
    int ctr = 0;
    int D[N];
+   struct timespec begin, end; 
+
+   clock_gettime(CLOCK_REALTIME, &begin);
    
    DuplicateData(D, A, N);
    mergeSort(D, 0, N, &ctr);
    
+   clock_gettime(CLOCK_REALTIME, &end);
+
+   long seconds = end.tv_sec - begin.tv_sec;
+   long nanoseconds = end.tv_nsec - begin.tv_nsec;
+   double elapsed = seconds + nanoseconds*1e-9;
+
    loc -> count = ctr;
-   loc -> time = 0;
-   printf("[MergeSort] count = %d, time = %d\n", loc -> count, loc -> time);
+   loc -> time = elapsed;
+   printf("[MergeSort] \tcount = %9d, time = %f\n", loc -> count, loc -> time);
 }

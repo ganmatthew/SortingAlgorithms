@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "randomgenerator.c"
 
@@ -8,7 +9,7 @@
 #define N_MAX 32768 // log base 2 (32768) = 15
 
 typedef struct sortresult { 
-   int time;   // machine execution time
+   double time;   // machine execution time
    int count;  // frequncy count
 } sortResult;
 
@@ -57,6 +58,7 @@ void ManualInputData (int A[], int N) {
 
 void getAverageData (float A[][2], int index, sortResult * loc) {
    int i, t;
+   char algorithm[15];
 
    for (t = 0; t < 2; t++) {
       float sum = 0;
@@ -73,7 +75,28 @@ void getAverageData (float A[][2], int index, sortResult * loc) {
       A[index][t] = sum / 10;
    } 
 
-   printf("[getAverageData] count = %f, time = %f\n", A[index][0], A[index][1]);
+   switch(index) {
+      case 0:
+         strcpy(algorithm, "Bubble Sort");
+         break;
+      case 1:
+         strcpy(algorithm, "Insertion Sort");
+         break;
+      case 2:
+         strcpy(algorithm, "Merge Sort");
+         break;
+      case 3:
+         strcpy(algorithm, "Quick Sort");
+         break;
+      case 4:
+         strcpy(algorithm, "Radix Sort");
+         break;
+      case 5:
+         strcpy(algorithm, "Selection Sort");
+         break;
+      
+   }
+   printf("[getAverageData] %-12s\t%-8s%10.0f, time = %f\n", algorithm, "count = ", A[index][0], A[index][1]);
 }
 
 char getLetterFromSortIndex (int index) {
@@ -117,8 +140,8 @@ void recordData (dataSet * data, int N) {
 
    if ( (destFile = fopen("output.txt", "a+")) ) {
       for (i = 0; i < 6; i++) {
-         fprintf(destFile, "%d %c ", data -> N, getLetterFromSortIndex(i));    // write N and type to file
-         fprintf(destFile, "%0.2f %f\n", average[i][0], average[i][1]);  // write count and time to file
+         fprintf(destFile, "%5d %c ", data -> N, getLetterFromSortIndex(i));    // write N and type to file
+         fprintf(destFile, "%13.0f %f\n", average[i][0], average[i][1]);  // write count and time to file
       }
    }
    else {

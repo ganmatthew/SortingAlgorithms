@@ -4,6 +4,9 @@
 // Jose Noel Noblefranca
 
 // A utility function to get maximum value in arr[] 
+
+#include <time.h>
+
 int getMax(int arr[], int n) 
 { 
     int mx = arr[0]; 
@@ -50,8 +53,12 @@ void countSort(int arr[], int n, int exp, int * ctr)
 // The main function to that sorts arr[] of size n using  
 // Radix Sort 
 void RadixSort(int A[], sortResult * loc, int N) { 
-   int D[N];
-   DuplicateData(D, A, N);
+    int D[N];
+    struct timespec begin, end; 
+
+    clock_gettime(CLOCK_REALTIME, &begin);
+
+    DuplicateData(D, A, N);
     // Find the maximum number to know number of digits 
     int m = getMax(D, N); 
     int exp, ctr = 0;
@@ -59,9 +66,15 @@ void RadixSort(int A[], sortResult * loc, int N) {
     // of passing digit number, exp is passed. exp is 10^i 
     // where i is current digit number 
     for (exp = 1; m / exp > 0; exp *= 10) 
-        countSort(D, N, exp, &ctr); 
+        countSort(D, N, exp, &ctr);
+
+    clock_gettime(CLOCK_REALTIME, &end);
+    
+    long seconds = end.tv_sec - begin.tv_sec;
+    long nanoseconds = end.tv_nsec - begin.tv_nsec;
+    double elapsed = seconds + nanoseconds*1e-9;
 
     loc -> count = ctr;
-    loc -> time = 0;
-    printf("[BubbleSort] count = %d, time = %d\n", loc -> count, loc -> time);
+    loc -> time = elapsed;
+    printf("[RadixSort] \tcount = %9d, time = %f\n", loc -> count, loc -> time);
 } 
