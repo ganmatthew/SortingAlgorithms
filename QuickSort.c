@@ -22,8 +22,8 @@ int partition(int * array, int low, int high, int * ctr)
         {
             i++;
             swap (&array[i], &array[j]);
-            ++(*ctr);
         }
+        ++(*ctr);
     }
 
     swap (&array[i + 1], &array[high]);

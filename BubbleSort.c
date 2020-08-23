@@ -16,8 +16,9 @@ void BubbleSort (int A[], sortResult * loc, int N) {
             D[i] = D[i + 1];
             D[i + 1] = temp;
          }
-         ctr += 2;
+         ctr++;
       }
+      ctr++;
    }
 
    loc -> count = ctr;

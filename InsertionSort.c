@@ -8,7 +8,6 @@ void InsertionSort (int A[], sortResult * loc, int N) {
    int D[N];
    
    DuplicateData(D, A, N);
-
    for (i = 0; i < N; i++) {
       temp = D[i];
       k = i;
@@ -16,11 +15,11 @@ void InsertionSort (int A[], sortResult * loc, int N) {
       while (k > 0 && temp < D[k - 1]) {
          D[k] = D[k - 1];
          --k;
-         ctr += 2;
+         ctr++;
       }
 
       D[k] = temp;
-      ctr += 2;
+      ctr++;
    }
 
    loc -> count = ctr;

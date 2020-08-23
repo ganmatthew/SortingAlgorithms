@@ -152,7 +152,7 @@ int main () {
       GenerateData(unsortedList, N);
 
       for (M = 0; M < 10; M++) {
-         printf("[main] M is index %d of %d\n", M, 10);
+         printf("\n[main] M is index %d of %d\n", M, 10);
          BubbleSort(unsortedList, &recordedData.b[M], N);
          InsertionSort(unsortedList, &recordedData.i[M], N);
          MergeSort(unsortedList, &recordedData.m[M], N);

@@ -14,12 +14,13 @@ void SelectionSort (int A[], sortResult * loc, int N) {
          if (D[j] < D[min]) {
             min = j;
          }
-         ctr += 2;
+         ctr++;
       }
 
       temp = D[min];
       D[min] = D[i];
       D[i] = temp;
+      ctr++;
    }
 
    loc -> count = ctr;
