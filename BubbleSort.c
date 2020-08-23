@@ -5,18 +5,19 @@
 void BubbleSort (int A[], sortResult * loc, int N) {
    int ctr = 0;
    int i, k, temp = A[0];
-
+   int D[N];
+   
+   DuplicateData(D, A, N);
    for (k = 0 ; k < N - 1; k++) {
 
       for (i = 0 ; i < N - k - 1; i++) {
-         if (A[i] > A[i + 1]) {
-            temp = A[i];
-            A[i] = A[i + 1];
-            A[i + 1] = temp;
-            ctr++;
+         if (D[i] > D[i + 1]) {
+            temp = D[i];
+            D[i] = D[i + 1];
+            D[i + 1] = temp;
          }
+         ctr += 2;
       }
-      ctr++;
    }
 
    loc -> count = ctr;

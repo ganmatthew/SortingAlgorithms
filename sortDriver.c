@@ -4,7 +4,8 @@
 
 #include "randomgenerator.c"
 
-#define INT_MAX 2147483647
+#define N_MIN 1024 // log base 2 (32768) = 10
+#define N_MAX 32768 // log base 2 (32768) = 15
 
 typedef struct sortresult { 
    int time;   // machine execution time
@@ -26,9 +27,23 @@ void DisplayData (int A[], int N) {
    int i;
    printf("\n---\n");
    for (i = 0; i < N; i++) {
-      printf("%d\n", A[i]);
+      printf("%d", A[i]);
+      if (i != N - 1)
+         printf(", ");
    }
    printf("---\n");
+}
+
+// Duplicates the data of one array to another of same size
+void DuplicateData (int D[], int S[], int N) {
+   int i, temp[N];
+   for (i = 0; i < N; i++) {
+      temp[i] = S[i];
+   }
+
+   for (i = 0; i < N; i++) {
+      D[i] = temp[i];
+   }
 }
 
 // Diagnostics for manually inputting data
@@ -92,20 +107,24 @@ void recordData (dataSet * data, int N) {
    float average[6][2];
    FILE *destFile;
 
+   printf("\n");
    getAverageData(average, 0, data -> b);
    getAverageData(average, 1, data -> i);
-   //getAverageData(average, 2, data -> m);
-   //getAverageData(average, 3, data -> q);
-   //getAverageData(average, 4, data -> r);
+   getAverageData(average, 2, data -> m);
+   getAverageData(average, 3, data -> q);
+   getAverageData(average, 4, data -> r);
    getAverageData(average, 5, data -> s);
 
-   if ( (destFile = fopen("output.txt", "a")) ) {
+   if ( (destFile = fopen("output.txt", "a+")) ) {
       for (i = 0; i < 6; i++) {
          fprintf(destFile, "%d %c ", data -> N, getLetterFromSortIndex(i));    // write N and type to file
-         getLetterFromSortIndex(i);
          fprintf(destFile, "%0.2f %f\n", average[i][0], average[i][1]);  // write count and time to file
       }
    }
+   else {
+      destFile = fopen("output.txt", "r");
+   }
+   
 
    fclose(destFile);
 }
@@ -123,26 +142,30 @@ int main () {
    srand((unsigned) time(0)); // get seed from current time
 
    int M, N;
-   for (N = 2; N < INT_MAX; N *= 2) { // increments N by N^2
-      printf("\n[main] N is %d of %d\n", N, INT_MAX);
+   for (N = N_MIN; N <= N_MAX; N *= 2) { // increments N by N^2
+      printf("\n[main] N is %d of %d\n", N, N_MAX);
       dataSet recordedData;
       recordedData.N = N;
 
-      int numberList[N];
+      int unsortedList[N];
       //ManualInputData(numberList, N);
-      GenerateData(numberList, N);
+      GenerateData(unsortedList, N);
 
       for (M = 0; M < 10; M++) {
-         printf("\n[main] M is %d of %d\n", M, 10);
-         BubbleSort(numberList, &recordedData.b[M], N);
-         InsertionSort(numberList, &recordedData.i[M], N);
-         //MergeSort(numberList, &recordedData.m[M], N);
-         //QuickSort(numberList, &recordedData.q[M], N);
-         //RadixSort(numberList, &ecordedData.r[M], N);
-         SelectionSort(numberList, &recordedData.s[M], N);
+         printf("[main] M is index %d of %d\n", M, 10);
+         BubbleSort(unsortedList, &recordedData.b[M], N);
+         InsertionSort(unsortedList, &recordedData.i[M], N);
+         MergeSort(unsortedList, &recordedData.m[M], N);
+         QuickSort(unsortedList, &recordedData.q[M], N);
+         RadixSort(unsortedList, &recordedData.r[M], N);
+         SelectionSort(unsortedList, &recordedData.s[M], N);
 
-         recordData(&recordedData, N);
+         if (M == 9) {
+            recordData(&recordedData, N);
+         }
+
       }  
    }
-   //DisplayData(data, N);
+
+   printf("\n[main] End of program!\n");
 }

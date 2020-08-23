@@ -4,20 +4,22 @@
 
 void SelectionSort (int A[], sortResult * loc, int N) {
    int i, j, min, temp, ctr = 0;
+   int D[N];
+   
+   DuplicateData(D, A, N);
    for (i = 0; i < N; i++) {
       
       min = i;
       for (j = i + 1; j < N; j++) {
-         if (A[j] < A[min])
+         if (D[j] < D[min]) {
             min = j;
-         ctr++;
+         }
+         ctr += 2;
       }
 
-      temp = A[min];
-      A[min] = A[i];
-      A[i] = temp;
-      ctr++;
-
+      temp = D[min];
+      D[min] = D[i];
+      D[i] = temp;
    }
 
    loc -> count = ctr;

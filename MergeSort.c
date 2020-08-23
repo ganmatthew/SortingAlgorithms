@@ -67,21 +67,22 @@ void mergeSort(int arr[], int l, int r, int * ctr)
       ++*ctr; 
 
       // Sort first and second halves 
-      mergeSort(arr, l, m, ++(*ctr)); 
-      mergeSort(arr, m + 1, r, ++(*ctr)); 
+      mergeSort(arr, l, m, ctr); 
+      mergeSort(arr, m + 1, r, ctr); 
 
-      merge(arr, l, m, r, &(*ctr));
+      merge(arr, l, m, r, ctr);
       
    } 
-
-   return ctr;
 } 
   
-void MergeSort (int A[],  sortResult loc, int N) {
+void MergeSort (int A[],  sortResult * loc, int N) {
    int ctr = 0;
-   mergeSort(A, 0, N, &ctr);
+   int D[N];
    
-   loc.count = ctr;
-   loc.time = 0;
-   printf("[MergeSort] count = %d, time = %d\n", loc.count, loc.time);
+   DuplicateData(D, A, N);
+   mergeSort(D, 0, N, &ctr);
+   
+   loc -> count = ctr;
+   loc -> time = 0;
+   printf("[MergeSort] count = %d, time = %d\n", loc -> count, loc -> time);
 }

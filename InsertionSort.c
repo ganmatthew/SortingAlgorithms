@@ -5,19 +5,22 @@
 void InsertionSort (int A[], sortResult * loc, int N) {
    int ctr = 0;
    int i, k, temp;
+   int D[N];
+   
+   DuplicateData(D, A, N);
 
    for (i = 0; i < N; i++) {
-      temp = A[i];
+      temp = D[i];
       k = i;
 
-      while (k > 0 && temp < A[k - 1]) {
-         A[k] = A[k - 1];
+      while (k > 0 && temp < D[k - 1]) {
+         D[k] = D[k - 1];
          --k;
-         ctr++;
+         ctr += 2;
       }
 
-      A[k] = temp;
-      ctr++;
+      D[k] = temp;
+      ctr += 2;
    }
 
    loc -> count = ctr;

@@ -49,18 +49,19 @@ void countSort(int arr[], int n, int exp, int * ctr)
   
 // The main function to that sorts arr[] of size n using  
 // Radix Sort 
-void RadixSort(int A[], sortResult loc, int N) { 
+void RadixSort(int A[], sortResult * loc, int N) { 
+   int D[N];
+   DuplicateData(D, A, N);
     // Find the maximum number to know number of digits 
-    int m = getMax(A[], N); 
-    
-    int ctr = 0;
+    int m = getMax(D, N); 
+    int exp, ctr = 0;
     // Do counting sort for every digit. Note that instead 
     // of passing digit number, exp is passed. exp is 10^i 
     // where i is current digit number 
-    for (int exp = 1; m/exp > 0; exp *= 10) 
-        countSort(arr, n, exp, &ctr); 
+    for (exp = 1; m / exp > 0; exp *= 10) 
+        countSort(D, N, exp, &ctr); 
 
-    loc.count = ctr;
-    loc.time = 0;
-    printf("[BubbleSort] count = %d, time = %d\n", loc.count, loc.time);
+    loc -> count = ctr;
+    loc -> time = 0;
+    printf("[BubbleSort] count = %d, time = %d\n", loc -> count, loc -> time);
 } 

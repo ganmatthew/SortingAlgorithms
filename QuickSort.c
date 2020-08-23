@@ -37,18 +37,21 @@ void quicksort (int * array, int low, int high, int * ctr)
 
    if (low < high)
    {
-      p = partition(array, low, high, &(*ctr));
+      p = partition(array, low, high, ctr);
       
-      quicksort(array, low, p - 1, ++(*ctr));
-      quicksort(array, p + 1, high, ++(*ctr));
+      quicksort(array, low, p - 1, ctr);
+      quicksort(array, p + 1, high, ctr);
    }
 }
 
-void QuickSort (int A[],  sortResult loc, int N) {
-    int ctr=0;
-    quicksort(A, 0, N - 1, &ctr);
+void QuickSort (int A[],  sortResult * loc, int N) {
+    int ctr = 0;
+   int D[N];
+   
+   DuplicateData(D, A, N);
+    quicksort(D, 0, N - 1, &ctr);
 
-    loc.count = ctr;
-    loc.time = 0;
-    printf("[QuickSort] count = %d, time = %d\n", loc.count, loc.time);
+    loc -> count = ctr;
+    loc -> time = 0;
+    printf("[QuickSort] count = %d, time = %d\n", loc -> count, loc -> time);
 }
