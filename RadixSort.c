@@ -1,9 +1,8 @@
-// Radix Sort (base 10)
-// Uses Counting Sort ass subroutine
+// Radix Sort (base 10) with counting sort subroutine
 // Based on https://www.geeksforgeeks.org/radix-sort/
 // Jose Noel Noblefranca
 
-// A utility function to get maximum value in arr[] 
+// Uses a utility function to get maximum value in arr[] 
 
 #include <time.h>
 
