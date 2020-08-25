@@ -1,11 +1,8 @@
 // Radix Sort (base 10) with counting sort subroutine
 // Based on https://www.geeksforgeeks.org/radix-sort/
-// Jose Noel Noblefranca
+// Jose Noel Noblefranca, Angelo Remudaro
 
 // Uses a utility function to get maximum value in arr[] 
-
-#include <time.h>
-
 int getMax(int arr[], int n) 
 { 
     int mx = arr[0]; 

@@ -1,8 +1,6 @@
 // Quick Sort 
 // Based on https://www.geeksforgeeks.org/quick-sort/
-// Jose Noel Noblefranca
-
-#include <time.h>
+// Jose Noel Noblefranca, Angelo Remudaro
 
 void swap (int * a, int * b)
 {

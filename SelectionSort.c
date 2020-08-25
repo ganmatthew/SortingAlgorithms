@@ -1,8 +1,6 @@
 // Selection Sort
 // Based on https://www.geeksforgeeks.org/selection-sort/
-// John Matthew Gan
-
-#include <time.h>
+// John Matthew Gan, Angelo Remudaro
 
 void SelectionSort (int A[], sortResult * loc, int N) {
    int i, j, min, temp, ctr = 0;

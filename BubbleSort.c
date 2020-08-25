@@ -2,8 +2,6 @@
 // Based on https://www.programmingsimplified.com/c/source-code/c-program-bubble-sort
 // John Matthew Gan
 
-#include <time.h>
-
 void BubbleSort (int A[], sortResult * loc, int N) {
    int ctr = 0;
    int i, k, temp = A[0];

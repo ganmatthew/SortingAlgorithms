@@ -2,8 +2,6 @@
 // Based on https://www.hackerearth.com/practice/algorithms/sorting/insertion-sort/tutorial/
 // John Matthew Gan
 
-#include <time.h>
-
 void InsertionSort (int A[], sortResult * loc, int N) {
    int ctr = 0;
    int i, k, temp;

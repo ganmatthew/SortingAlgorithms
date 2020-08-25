@@ -14,13 +14,13 @@
 
 // Contains the execution time and frequency count of each M run
 typedef struct sortresult { 
-   double time;      // machine execution time
-   int count;        // frequncy count
+   double time;         // machine execution time
+   int count;           // frequncy count
 } sortResult;
 
 // Contains the all testing data of each N run
 typedef struct dataset {
-   int N;            // value of N
+   int N;               // value of N
    sortResult b[M_MAX]; // bubble sort
    sortResult i[M_MAX]; // insertion sort
    sortResult m[M_MAX]; // merge sort

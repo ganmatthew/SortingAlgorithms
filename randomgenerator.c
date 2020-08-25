@@ -1,5 +1,6 @@
 // Random Number Generator
 // Based on https://www.geeksforgeeks.org/generating-random-number-range-c/
+// John Matthew Gan
 
 #define USE_LIMIT 0     // set to true to use below limits, otherwise set to false
 #define LIST_MIN 1      // lowest possible generated number 
